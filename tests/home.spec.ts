@@ -37,6 +37,20 @@ test.describe("Home page with no auth", () => {
     await expect(productGrid.getByRole("link")).toHaveCount(1);
     await expect(page.getByAltText("Thor Hammer")).toBeVisible();
   });
+
+test("search for Pliers", async ({ page }) => {
+    const productGrid = page.locator(".col-md-9");
+    await page.getByTestId("search-query").fill("Pliers");
+    await page.getByTestId("search-submit").click();
+    await expect(productGrid.getByRole("link")).toHaveCount(4);
+    await expect(page.getByTestId('product-name').nth(0)).toContainText('Combination Pliers');
+    await expect(page.getByTestId('product-name').nth(1)).toContainText('Pliers');
+    await expect(page.getByTestId('product-name').nth(2)).toContainText('Long Nose Pliers');
+    await expect(page.getByTestId('product-name').nth(3)).toContainText('Slip Joint Pliers');
+  });
+
+
+
 });
 
 test.describe("Home page customer 01 auth", () => {
