@@ -52,6 +52,7 @@ test.describe("Home page customer 01 auth", () => {
     });
   });
   test("check customer 01 is signed in", async ({ page }) => {
+    await page.waitForLoadState('networkidle');
     await expect(page.getByTestId("nav-sign-in")).not.toBeVisible();
     await expect(page.getByTestId("nav-menu")).toContainText("Jane Doe");
   });
